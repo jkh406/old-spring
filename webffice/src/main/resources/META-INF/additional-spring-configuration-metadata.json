@@ -1,0 +1,42 @@
+{"properties": [
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
+  },
+  {
+    "name": "jwt.header",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.header'"
+  },
+  {
+    "name": "jwt.token-validity-in-seconds",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.token-validity-in-seconds'"
+  },
+  {
+    "name": "security.user.name",
+    "type": "java.lang.String",
+    "description": "A description for 'security.user.name'"
+  },
+  {
+    "name": "security.user.password",
+    "type": "java.lang.String",
+    "description": "A description for 'security.user.password'"
+  },
+  {
+    "name": "upload",
+    "type": "java.lang.String",
+    "description": "A description for 'upload'"
+  },
+  {
+    "name": "custom.path.upload-images",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.path.upload-images'"
+  },
+  {
+    "name": "custom.path.upload-path",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.path.upload-path'"
+  }
+]}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.anbtech.webffice.domain.user.UserMapper">
+    <select id="getUserAccount" resultType="com.anbtech.webffice.domain.user.UserVo">
+        SELECT * FROM TB_USER
+        WHERE USER_ID= #{user_Id}
+    </select>
+
+    <!-- 회원가입 -->
+    <insert id="saveUser" parameterType="com.anbtech.webffice.domain.user.UserVo">
+        INSERT INTO TB_USER
+        (USER_ID, USER_PW, USER_NAME, USER_AUTH, APPEND_DATE, UPDATE_DATE)
+        VALUES(#{user_Id},#{user_Pw},#{userName},#{userAuth},#{appendDate},#{updateDate});
+    </insert>
+
+    <insert id="join" parameterType="com.anbtech.webffice.domain.user.dto.UserDTO">
+      INSERT INTO sys.user_TB
+      (user_ID, user_PW, user_role, create_date, update_date)
+      VALUES(#{user_ID}, #{user_PW}, #{user_role}, #{create_Date}, #{update_Date});
+    </insert>
+
+    <!-- <insert id="addRole" parameterType="com.anbtech.webffice.domain.user.dto.UserDTO">
+      INSERT INTO user_authority_TB
+      (user_FK, authority_FK)
+      VALUES(
+        (SELECT user_PK FROM user_TB WHERE user_ID = #{user_Id}),
+        (SELECT authority_PK FROM authority_TB WHERE authority_PK = #{userRole})
+      );
+    </insert> -->
+
+    <select id="findUser" parameterType="com.anbtech.webffice.domain.user.UserVo"
+     resultType="com.anbtech.webffice.domain.user.dto.UserDTO">
+      SELECT user_id, user_PW, user_role, create_date, update_date, avatar, user_name
+      FROM sys.user_TB
+      WHERE user_ID = #{user_Id}
+    </select>
+    
+    <select id="pageList" parameterType="com.anbtech.webffice.domain.user.UserVo"
+     resultType="com.anbtech.webffice.domain.user.dto.UserDTO">
+	select a.user_ID as user_ID, b.authority as authority, d.page_url as page_url 
+	  from sys.user_tb a
+	  join sys.authorities b
+	    on a.user_ID = b.username 
+	  join sys.page_authorities c
+	    on c.authority = b.authority 
+	  join sys.pages d 
+	    on d.page_id = c.page_id 
+	 where a.user_ID = #{user_Id}
+    </select>
+
+    <select id="findUserId" resultType="com.anbtech.webffice.domain.user.dto.UserDTO">
+      SELECT user_PK 
+      FROM sys.user_TB
+      WHERE user_ID = #{user_Id};
+    </select>
+</mapper>
+
+<!-- Optional<UserVo> findByUserId(String userId); -->
